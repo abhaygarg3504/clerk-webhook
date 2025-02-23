@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { Webhook } from "svix";
+const {Webhook} = require('svix')
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -7,7 +7,9 @@ const app = express();
 
 // Connect to MongoDB
 console.log("Connecting to MongoDB...");
-await mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI).then(() => {
+    console.log("database connected")
+});
 console.log("Connected to MongoDB");
 const User = mongoose.connection.collection("users");
 
